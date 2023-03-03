@@ -1,28 +1,41 @@
 #include <iostream>
-#include "triangle.h"
+#include "circle.h"
 #include <math.h>
-// created by grishin i gulyaev together; 
-
+//by gulyaev and Grishin :)
 using namespace std;
 int main() {
 	setlocale(LC_ALL, "Rus");
-	triangle mas[3];
-	double a, b, c;
+	float a, b, c;
+	Circle mas[3] = { Circle(0, 0, 0), Circle(0, 0, 0), Circle(0, 0, 0) };
 	for (int i = 0; i < 3; i++) {
-		cout << "Введите стороны треугольника под номером " << i + 1 << " cherez probel" << endl;
+		cout << "введите координаты и радиус круга №" << i + 1<<':' << endl;
 		cin >> a >> b >> c;
-		mas[i].set(a, b, c);
-		if (!(mas[i].exst_tr())) {
-			mas[i].show();
-			cout << " ne sushestvuet" << endl;
-			i--;
+		mas[i].set_circle(a, b, c);
+		cout << "Площадь круга №" << i + 1 << ' ' << mas[i].square()<<endl;
+		cout << "стороны треугольника для круга №" << i + 1 <<':'<< endl;
+		cin >> a >> b >> c;
+		if (mas[i].triangle_around(a, b, c)) {
+			cout << "В круг можно вписать этот треугольник"<<endl;
+		}
+		else {
+			cout << "В круг нельзя вписать этот треугольник"<<endl;
+		}
+		if (mas[i].triangle_in(a, b, c)) {
+			cout << "В треугольник можно вписать этот круг"<<endl;
+		}
+		else {
+			cout << "В треугольник нельзя вписать этот круг"<<endl;
+		}
+		cout <<"Ввод данных второго круга для сравнения:" << ' ';
+		cin >> a >> b >> c;
+		if (mas[i].check_circle(a, b, c)) {
+			cout << "Окружности пересекаются"<<endl;
+		}
+		else {
+			cout << "Окружности не пересекаются"<<endl;
 		}
 	}
-	for (int i = 0; i < 3; i++) {
-		mas[i].show();
-		cout << mas[i].perimetr() << " - perimetr" << endl;
-		cout << mas[i].square() << " - ploshad'" << endl;
-	}
+
 	return 0;
 }
 
